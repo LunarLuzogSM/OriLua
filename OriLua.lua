@@ -22,4 +22,6 @@ local OriLua_UPDATER_GBOX = gui.Groupbox(OriLua_TAB, "Updater", 10, 10, 160, 0)
 local OriLua_UPDATER_CURRENTVERSION = gui.Text(OriLua_UPDATER_GBOX, "Current version: v" .. CURRENTVERSION)
 local OriLua_UPDATER_LATESTVERSION = gui.Text(OriLua_UPDATER_GBOX, "Latest version: v" .. LATESTVERSION)
 local OriLua_UPDATER_UPDATE = gui.Button(OriLua_UPDATER_GBOX, "Update", Update)
+local OriLua_UPDATER_CHANGELOG_GBOX = gui.Groupbox(OriLua_TAB, "Changelog", 190, 10, 360, 0)
+local OriLua_UPDATER_CHANGELOG_TEXT = gui.Text(OriLua_UPDATER_CHANGELOG_GBOX, http.Get("https://raw.githubusercontent.com/LunarLuzogSM/OriLua/master/changelog.txt"))
 ------------------------------------
