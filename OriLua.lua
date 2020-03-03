@@ -15,13 +15,12 @@ local function Update()
     end
 end
 --------------------------------------
-local OriLua_WINDOW = gui.Window("orilua", "OriLua", 100, 100, 500, 500)
---------------------------------------
-local OriLua_TAB = gui.Tab(gui.Reference("Settings"), "orilua.updater", "OriLua Updater")
-local OriLua_UPDATER_GBOX = gui.Groupbox(OriLua_TAB, "Updater", 10, 10, 160, 0)
-local OriLua_UPDATER_CURRENTVERSION = gui.Text(OriLua_UPDATER_GBOX, "Current version: v" .. CURRENTVERSION)
-local OriLua_UPDATER_LATESTVERSION = gui.Text(OriLua_UPDATER_GBOX, "Latest version: v" .. LATESTVERSION)
-local OriLua_UPDATER_UPDATE = gui.Button(OriLua_UPDATER_GBOX, "Update", Update)
-local OriLua_UPDATER_CHANGELOG_GBOX = gui.Groupbox(OriLua_TAB, "Changelog", 190, 10, 360, 0)
-local OriLua_UPDATER_CHANGELOG_TEXT = gui.Text(OriLua_UPDATER_CHANGELOG_GBOX, http.Get("https://raw.githubusercontent.com/LunarLuzogSM/OriLua/master/changelog.txt"))
+local OriLua_TAB = gui.Tab(gui.Reference("Settings"), "orilua.LL", "OriLua LL")
+local OriLua_LL_GBOX = gui.Groupbox(OriLua_TAB, "Updater", 10, 10, 160, 0)
+local OriLua_LL_CURRENTVERSION = gui.Text(OriLua_LL_GBOX, "Current version: v" .. CURRENTVERSION)
+local OriLua_LL_LATESTVERSION = gui.Text(OriLua_LL_GBOX, "Latest version: v" .. LATESTVERSION)
+local OriLua_LL_UPDATE = gui.Button(OriLua_LL_GBOX, "Update", Update)
+local OriLua_LL_CHANGELOG_GBOX = gui.Groupbox(OriLua_TAB, "Changelog", 190, 10, 290, 0)
+local OriLua_LL_ORILUA_GBOX = gui.Groupbox(OriLua_TAB, "HvH", 10, 190, 470, 0)
+local OriLua_LL_CHANGELOG_TEXT = gui.Text(OriLua_LL_CHANGELOG_GBOX, http.Get("https://raw.githubusercontent.com/LunarLuzogSM/OriLua/master/changelog.txt"))
 --------------------------------------
