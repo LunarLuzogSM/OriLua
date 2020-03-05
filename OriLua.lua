@@ -1,5 +1,5 @@
--- OriLua --
--- Made By LunarLuzog Aka ShiinaChan#5523 --
+-- OriLua
+-- Made By LunarLuzog Aka ShiinaChan#5523
 
 -------------------------------------- Print
 
