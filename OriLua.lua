@@ -7,7 +7,7 @@ print("Successfully Loaded OriLua")
 
 -------------------------------------- Auto Update
 
-local CURRENTVERSION = "0.1"
+local CURRENTVERSION = "1"
 local LATESTVERSION = http.Get("https://raw.githubusercontent.com/LunarLuzogSM/OriLua/master/version.txt")
 local function Update() 
     if CURRENTVERSION ~= LATESTVERSION then
