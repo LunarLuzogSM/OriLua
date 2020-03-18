@@ -7,7 +7,7 @@ print("Successfully Loaded OriLua")
 
 -------------------------------------- Auto Update
 
-local CURRENTVERSION = "1.0"
+local CURRENTVERSION = "1.1"
 local LATESTVERSION = http.Get("https://raw.githubusercontent.com/LunarLuzogSM/OriLua/master/version.txt")
 local function Update() 
     if CURRENTVERSION ~= LATESTVERSION then
@@ -52,6 +52,7 @@ local OriLua_LL_RAINBOW_TEXT = gui.Text(OriLua_LL_RAINBOW_GBOX, http.Get("https:
 -------------------------------------- Checkbox + Sliders / Miscs ( ShiinaChan#5523 (Me))
 
 local OriLua_LL_MISCS_ERADAR = gui.Checkbox(OriLua_LL_MISCS_GBOX, "OriLua_LL_MISCS_ERADAR", "Engine Radar", false)
+local OriLua_LL_MISCS_DOORSPAM = gui.Keybox(OriLua_LL_MISCS_GBOX, "OriLua_LL_MISCS_DOORSPAM", "Door Spam Key", 0)
 local OriLua_LL_MISCS_MULTI = gui.Multibox(OriLua_LL_MISCS_GBOX, "Antiaim lines")
 local OriLua_LL_MISCS_NETWORKED = gui.Checkbox(OriLua_LL_MISCS_MULTI, "vis.local.aalines.networked", "Networked Angle", false)
 local OriLua_LL_MISCS_LBY = gui.Checkbox(OriLua_LL_MISCS_MULTI, "vis.local.aalines.lby", "LBY", false)
@@ -124,7 +125,7 @@ if OriLua_LL_RAINBOWEN_VIS_CHECKBOX:GetValue() then
 end
 callbacks.Register( "Draw", "rainbowesp", rainbowesp);
     
------ Engine Radar ( KriZz87#5317 )
+----- Engine Radar (KriZz87#5317)
 
 local function engine_radar_draw()
 for index, Player in pairs(entities.FindByClass("CCSPlayer")) do
@@ -137,7 +138,7 @@ end
 end
 callbacks.Register("Draw", "engine_radar_draw", engine_radar_draw);
 
------  Anti-Aim Angle Lines ( Superyu'#7167 )
+----- Anti-Aim Angle Lines (Superyu'#7167)
 
 local lastChoked = nil;
 local fake = nil;
@@ -204,3 +205,18 @@ callbacks.Register("CreateMove", function(pCmd)
         end
     end
 end)
+
+----- Door Spam (Stacky -- https://aimware.net/forum/user-218912.html)
+
+local switch = false
+callbacks.Register( "CreateMove", function(cmd)
+    if OriLua_LL_MISCS_DOORSPAM:GetValue() ~= 0 then
+        if input.IsButtonDown(OriLua_LL_MISCS_DOORSPAM:GetValue()) then
+            if switch then client.Command("+use", true)
+            else client.Command("-use", true) end
+            switch = not switch
+        else
+            if not switch then client.Command("-use", true) end
+        end
+    end
+end )
