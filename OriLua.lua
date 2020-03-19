@@ -7,7 +7,7 @@ print("Successfully Loaded OriLua")
 
 -------------------------------------- Auto Update
 
-local CURRENTVERSION = "1.1"
+local CURRENTVERSION = "1.2"
 local LATESTVERSION = http.Get("https://raw.githubusercontent.com/LunarLuzogSM/OriLua/master/version.txt")
 local function Update() 
     if CURRENTVERSION ~= LATESTVERSION then
@@ -47,11 +47,12 @@ local OriLua_LL_RAINBOWEN_VIS_CHECKBOX = gui.Checkbox(OriLua_LL_RAINBOW_GBOX,"Ra
 local OriLua_LL_RAINBOWEN_OCC_CHECKBOX = gui.Checkbox(OriLua_LL_RAINBOW_GBOX,"RainbowEnOvCh", "Enemy Occluded", false);
 local OriLua_LL_RRAINBOWCR_CHECKBOX = gui.Checkbox(OriLua_LL_RAINBOW_GBOX,"RainbowCr", "Crosshair", false);
 local OriLua_LL_RAINBOW_TEXT = gui.Text(OriLua_LL_RAINBOW_GBOX, http.Get("https://raw.githubusercontent.com/LunarLuzogSM/OriLua/master/rainbow.txt"))
--- local OriLua_LL_RAINBOW_SPEED = gui.Slider(OriLua_LL_RAINBOW_GBOX, "RainbowSp", "Rainbow Speed", 50, 0, 100)
 
 -------------------------------------- Checkbox + Sliders / Miscs ( ShiinaChan#5523 (Me))
 
 local OriLua_LL_MISCS_ERADAR = gui.Checkbox(OriLua_LL_MISCS_GBOX, "OriLua_LL_MISCS_ERADAR", "Engine Radar", false)
+local OriLua_LL_MISCS_RTOGGLEINDICATOR = gui.Checkbox(OriLua_LL_MISCS_GBOX, "OriLua_LL_MISCS_RTOGGLEINDICATOR", "Invert Indicator", false )
+local OriLua_LL_MISCS_RTOGGLE = gui.Keybox(OriLua_LL_MISCS_GBOX, "OriLua_LL_MISCS_RTOGGLE", "Quick Toggle Key",0)
 local OriLua_LL_MISCS_DOORSPAM = gui.Keybox(OriLua_LL_MISCS_GBOX, "OriLua_LL_MISCS_DOORSPAM", "Door Spam Key", 0)
 local OriLua_LL_MISCS_MULTI = gui.Multibox(OriLua_LL_MISCS_GBOX, "Antiaim lines")
 local OriLua_LL_MISCS_NETWORKED = gui.Checkbox(OriLua_LL_MISCS_MULTI, "vis.local.aalines.networked", "Networked Angle", false)
@@ -61,6 +62,7 @@ local OriLua_LL_MISCS_LASTCHOKEDANG = gui.Checkbox(OriLua_LL_MISCS_MULTI, "vis.l
 
 -------------------------------------- Description ( ShiinaChan#5523 (Me))
 
+OriLua_LL_MISCS_RTOGGLE:SetDescription("This Key Will Off/On Resolver (ONLY RBOT).")
 OriLua_LL_VISUALS_EXPOSURE_SLIDER:SetDescription("100  Is  Lighter  Than  1")
 
 -------------------------------------- All Code
@@ -202,6 +204,44 @@ callbacks.Register("CreateMove", function(pCmd)
             lastChoke = globals.CurTime();
         else
             localAngle = pCmd.viewangles
+        end
+    end
+end)
+----- Resolver Indicator (Stacky -- https://aimware.net/forum/user-218912.html)
+
+local FONT = draw.CreateFont("Verdana", 30, 2000)
+local resolver = 1
+
+----- Resolver Toggle And Helped By Stacky (Stacky -- https://aimware.net/forum/user-218912.html) (Btw he Just Almost Do All But He Helped Me A Lot Got Rep +1 Him)
+
+local pressed = false;
+callbacks.Register("Draw", function()
+    if OriLua_LL_MISCS_RTOGGLE:GetValue() ~= 0 then
+        if input.IsButtonPressed(OriLua_LL_MISCS_RTOGGLE:GetValue()) then
+            resolver = resolver * -1
+        end
+    end
+    if OriLua_LL_MISCS_RTOGGLEINDICATOR:GetValue() and entities.GetLocalPlayer() then
+            local screenW, screenH = draw.GetScreenSize()
+            if resolver == 1 then
+                draw.Color(255, 25, 25)
+            else
+                draw.Color(124, 176, 34)
+            end
+            draw.SetFont(FONT)
+            draw.TextShadow(10, screenH - 90, "Resolver" )
+    end
+
+    if OriLua_LL_MISCS_RTOGGLE:GetValue() ~= 0 then
+        if input.IsButtonPressed(OriLua_LL_MISCS_RTOGGLE:GetValue()) then
+            pressed=true;
+        elseif (pressed and input.IsButtonReleased(OriLua_LL_MISCS_RTOGGLE:GetValue())) then
+            pressed=false;
+            if gui.GetValue("rbot.accuracy.posadj.resolver") then
+                gui.SetValue("rbot.accuracy.posadj.resolver", false)
+            else
+                gui.SetValue("rbot.accuracy.posadj.resolver", true)
+            end
         end
     end
 end)
