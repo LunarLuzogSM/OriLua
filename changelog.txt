@@ -1,5 +1,5 @@
-1.1
+1.2
 
-Update 03/18/2020 -- Added Spam Door
+Update 03/19/2020 -- Added Resolver Toggle + Indicator
 
 Discord - https://discord.gg/8gjjqQH
