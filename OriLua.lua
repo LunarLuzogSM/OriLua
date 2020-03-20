@@ -51,7 +51,7 @@ local OriLua_LL_RAINBOW_TEXT = gui.Text(OriLua_LL_RAINBOW_GBOX, http.Get("https:
 -------------------------------------- Checkbox + Sliders / Miscs ( ShiinaChan#5523 (Me))
 
 local OriLua_LL_MISCS_ERADAR = gui.Checkbox(OriLua_LL_MISCS_GBOX, "OriLua_LL_MISCS_ERADAR", "Engine Radar", false)
-local OriLua_LL_MISCS_RTOGGLEINDICATOR = gui.Checkbox(OriLua_LL_MISCS_GBOX, "OriLua_LL_MISCS_RTOGGLEINDICATOR", "Invert Indicator", false )
+local OriLua_LL_MISCS_RTOGGLEINDICATOR = gui.Checkbox(OriLua_LL_MISCS_GBOX, "OriLua_LL_MISCS_RTOGGLEINDICATOR", "Resolver Indicator", false )
 local OriLua_LL_MISCS_RTOGGLE = gui.Keybox(OriLua_LL_MISCS_GBOX, "OriLua_LL_MISCS_RTOGGLE", "Quick Toggle Key",0)
 local OriLua_LL_MISCS_DOORSPAM = gui.Keybox(OriLua_LL_MISCS_GBOX, "OriLua_LL_MISCS_DOORSPAM", "Door Spam Key", 0)
 local OriLua_LL_MISCS_MULTI = gui.Multibox(OriLua_LL_MISCS_GBOX, "Antiaim lines")
