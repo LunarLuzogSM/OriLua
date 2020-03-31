@@ -1,5 +1,5 @@
 1.2
 
-Update 03/19/2020 -- Added Resolver Toggle + Indicator
+Update 03/31/2020 -- Added Viewmodel Changer
 
 Discord - https://discord.gg/8gjjqQH
