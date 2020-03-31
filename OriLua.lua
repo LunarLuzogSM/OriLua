@@ -7,7 +7,7 @@ print("Successfully Loaded OriLua")
 
 -------------------------------------- Auto Update
 
-local CURRENTVERSION = "1.2"
+local CURRENTVERSION = "1.3"
 local LATESTVERSION = http.Get("https://raw.githubusercontent.com/LunarLuzogSM/OriLua/master/version.txt")
 local function Update() 
     if CURRENTVERSION ~= LATESTVERSION then
@@ -24,8 +24,8 @@ local OriLua_TAB = gui.Tab(gui.Reference("Settings"), "orilua.LL", "OriLua LL")
 local OriLua_LL_UPDATER_GBOX = gui.Groupbox(OriLua_TAB, "Updater", 10, 10, 160, 0) -- Updater-GBOX
 local OriLua_LL_CHANGELOG_GBOX = gui.Groupbox(OriLua_TAB, "Changelog", 190, 10, 290, 0) -- Changelog-GBOX
 local OriLua_LL_VISUALS_GBOX = gui.Groupbox(OriLua_TAB, "Visuals", 10, 190, 470, 0) -- Visuals-GBOX
-local OriLua_LL_RAINBOW_GBOX = gui.Groupbox(OriLua_TAB, "Rainbow", 10, 435, 470, 0) -- Rainbow-GBOX
-local OriLua_LL_MISCS_GBOX = gui.Groupbox(OriLua_TAB, "Miscs", 10, 675, 470, 0) -- Miscs-GBOX
+local OriLua_LL_RAINBOW_GBOX = gui.Groupbox(OriLua_TAB, "Rainbow", 10, 662, 470, 0) -- Rainbow-GBOX
+local OriLua_LL_MISCS_GBOX = gui.Groupbox(OriLua_TAB, "Miscs", 10, 900, 470, 0) -- Miscs-GBOX
 
 -------------------------------------- Auto Update + Changelog ( ShiinaChan#5523 (Me))
 
@@ -37,9 +37,13 @@ local OriLua_LL_CHANGELOG_TEXT = gui.Text(OriLua_LL_CHANGELOG_GBOX, http.Get("ht
 -------------------------------------- Checkbox + Sliders / Visuals ( ShiinaChan#5523 (Me))
 
 local OriLua_LL_VISUALS_FULLBRIGHT = gui.Checkbox(OriLua_LL_VISUALS_GBOX, "OriLua_LL_VISUALS_FULLBRIGHT", "Full Bright", false)
-local OriLua_LL_VISUALS_ASPECT_RATIO = gui.Checkbox(OriLua_LL_VISUALS_GBOX, "OriLua_LL_VISUALS_ASPECT_RATIO", "Aspect Ratio", false);  
+local OriLua_LL_VISUALS_ASPECT_RATIO = gui.Checkbox(OriLua_LL_VISUALS_GBOX, "OriLua_LL_VISUALS_ASPECT_RATIO", "Aspect Ratio", false);
+local OriLua_LL_VISUALS_CUSTOM_VIEWMODEL = gui.Checkbox(OriLua_LL_VISUALS_GBOX, "OriLua_LL_VISUALS_CUSTOM_VIEWMODEL", "Viewmodel Editor", 0 );
 local OriLua_LL_VISUALS_EXPOSURE_SLIDER = gui.Slider(OriLua_LL_VISUALS_GBOX, "OriLua_LL_VISUALS_BLOOM_EXPOSURE", "Night Mode", 100, 1, 100);
 local OriLua_LL_VISUALS_ASPECT_RATIO_SLIDER = gui.Slider(OriLua_LL_VISUALS_GBOX, "OriLua_LL_VISUALS_ASPECT_RATIO_SLIDER", "Aspect Ratio", 100, 1, 199)
+local OriLua_LL_VISUALS_XS = gui.Slider(OriLua_LL_VISUALS_GBOX, "OriLua_LL_VISUALS_X", "X", xO, -20, 20);   
+local OriLua_LL_VISUALS_YS = gui.Slider(OriLua_LL_VISUALS_GBOX, "OriLua_LL_VISUALS_Y", "Y", yO, -100, 100);   
+local OriLua_LL_VISUALS_ZS = gui.Slider(OriLua_LL_VISUALS_GBOX, "OriLua_LL_VISUALS_Z", "Z", zO, -20, 20);   
 
 -------------------------------------- Checkbox + Sliders / Rainbow ( ShiinaChan#5523 (Me))
 
@@ -77,6 +81,31 @@ function full_bright()
      end 
     end
 callbacks.Register('Draw', "OriLua_LL_VISUALS_FULLBRIGHT" ,full_bright);
+
+----- Viewmodel (adrianobessa5682 -- https://aimware.net/forum/user-236354.html)
+
+local OriLua_LL_VISUALS_XO = client.GetConVar("viewmodel_offset_x");  
+local OriLua_LL_VISUALS_YO = client.GetConVar("viewmodel_offset_y");  
+local OriLua_LL_VISUALS_ZO = client.GetConVar("viewmodel_offset_z"); 
+local OriLua_LL_VISUALS_FO = client.GetConVar("viewmodel_fov");   
+local OriLua_LL_VISUALS_VFOV = gui.Slider(OriLua_LL_VISUALS_GBOX, "OriLua_LL_VISUALS_VFOV", "Viewmodel FOV", fO, 0, 120); 
+local function Visuals_Viewmodel() 
+
+   if OriLua_LL_VISUALS_CUSTOM_VIEWMODEL:GetValue() then  
+client.SetConVar("viewmodel_offset_x", OriLua_LL_VISUALS_XS:GetValue(), true); 
+client.SetConVar("viewmodel_offset_y", OriLua_LL_VISUALS_YS:GetValue(), true); 
+client.SetConVar("viewmodel_offset_z", OriLua_LL_VISUALS_ZS:GetValue(), true); 
+client.SetConVar("viewmodel_fov", OriLua_LL_VISUALS_VFOV:GetValue(), true); 
+   end
+   end
+local function Visuals_Disable_Post_Processing()
+       if visuals_disable_post_processing:GetValue() then  
+           client.SetConVar( "mat_postprocess_enable", 0, true );
+   else
+       client.SetConVar( "mat_postprocess_enable", 1, true );
+       end
+   end
+callbacks.Register("Draw", "Custom Viewmodel Editor", Visuals_Viewmodel)
 
 ----- NightMode (adrianobessa5682 -- https://aimware.net/forum/user-236354.html)
 
@@ -229,9 +258,8 @@ callbacks.Register("Draw", function()
                 draw.Color(124, 176, 34)
             end
             draw.SetFont(FONT)
-            draw.TextShadow(10, screenH - 90, "Resolver" )
+            draw.TextShadow(10, screenH - 75, "Resolver" )
     end
-
     if OriLua_LL_MISCS_RTOGGLE:GetValue() ~= 0 then
         if input.IsButtonPressed(OriLua_LL_MISCS_RTOGGLE:GetValue()) then
             pressed=true;
