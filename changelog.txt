@@ -1,5 +1,4 @@
-1.2
+1.4
 
-Update 03/31/2020 -- Added Viewmodel Changer
-
-Discord - https://discord.gg/8gjjqQH
+Update 13/04/2020 -- Added Watermark
+Discord - https://discord.gg/mscum6c
