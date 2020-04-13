@@ -1,3 +1,2 @@
 Rainbow Speed With Slider Comming Soon
-For Now You Can Change Directly In The Code The Speed At The Line 96
-Rainbow Line Following Comming Soon Too
+For Now You Can Change Directly In The Code The Speed At The Line 167
