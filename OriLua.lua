@@ -7,7 +7,7 @@ print("Successfully Loaded OriLua")
 
 -------------------------------------- Auto Update
 
-local CURRENTVERSION = "1.3"
+local CURRENTVERSION = "1.4"
 local LATESTVERSION = http.Get("https://raw.githubusercontent.com/LunarLuzogSM/OriLua/master/version.txt")
 local function Update() 
     if CURRENTVERSION ~= LATESTVERSION then
@@ -18,23 +18,25 @@ local function Update()
     end
 end
 
--------------------------------------- Gui ( ShiinaChan#5523 (Me))
+-------------------------------------- Gui ( ShiinaChan#5523 (Me)
 
 local OriLua_TAB = gui.Tab(gui.Reference("Settings"), "orilua.LL", "OriLua LL")
 local OriLua_LL_UPDATER_GBOX = gui.Groupbox(OriLua_TAB, "Updater", 10, 10, 160, 0) -- Updater-GBOX
 local OriLua_LL_CHANGELOG_GBOX = gui.Groupbox(OriLua_TAB, "Changelog", 190, 10, 290, 0) -- Changelog-GBOX
 local OriLua_LL_VISUALS_GBOX = gui.Groupbox(OriLua_TAB, "Visuals", 10, 190, 470, 0) -- Visuals-GBOX
-local OriLua_LL_RAINBOW_GBOX = gui.Groupbox(OriLua_TAB, "Rainbow", 10, 662, 470, 0) -- Rainbow-GBOX
-local OriLua_LL_MISCS_GBOX = gui.Groupbox(OriLua_TAB, "Miscs", 10, 900, 470, 0) -- Miscs-GBOX
+local OriLua_LL_MISCS_GBOX = gui.Groupbox(OriLua_TAB, "Miscs", 10, 660, 470, 0) -- Miscs-GBOX
+local OriLua_LL_WATERMARK_GBOX = gui.Groupbox(OriLua_TAB, "Watermark", 10, 975, 470, 0) -- Watermark-GBOX
+local OriLua_LL_RAINBOW_GBOX = gui.Groupbox(OriLua_TAB, "Rainbow", 10, 1142, 470, 0) -- Rainbow-GBOX
 
--------------------------------------- Auto Update + Changelog ( ShiinaChan#5523 (Me))
+	
+-------------------------------------- Auto Update + Changelog ( ShiinaChan#5523 (Me)
 
 local OriLua_LL_CURRENTVERSION = gui.Text(OriLua_LL_UPDATER_GBOX, "Current version: v" .. CURRENTVERSION)
 local OriLua_LL_LATESTVERSION = gui.Text(OriLua_LL_UPDATER_GBOX, "Latest version: v" .. LATESTVERSION)
 local OriLua_LL_UPDATE = gui.Button(OriLua_LL_UPDATER_GBOX, "Update", Update)
 local OriLua_LL_CHANGELOG_TEXT = gui.Text(OriLua_LL_CHANGELOG_GBOX, http.Get("https://raw.githubusercontent.com/LunarLuzogSM/OriLua/master/changelog.txt"))
 
--------------------------------------- Checkbox + Sliders / Visuals ( ShiinaChan#5523 (Me))
+-------------------------------------- Checkbox + Sliders / Visuals ( ShiinaChan#5523 (Me)
 
 local OriLua_LL_VISUALS_FULLBRIGHT = gui.Checkbox(OriLua_LL_VISUALS_GBOX, "OriLua_LL_VISUALS_FULLBRIGHT", "Full Bright", false)
 local OriLua_LL_VISUALS_ASPECT_RATIO = gui.Checkbox(OriLua_LL_VISUALS_GBOX, "OriLua_LL_VISUALS_ASPECT_RATIO", "Aspect Ratio", false);
@@ -45,14 +47,7 @@ local OriLua_LL_VISUALS_XS = gui.Slider(OriLua_LL_VISUALS_GBOX, "OriLua_LL_VISUA
 local OriLua_LL_VISUALS_YS = gui.Slider(OriLua_LL_VISUALS_GBOX, "OriLua_LL_VISUALS_Y", "Y", yO, -100, 100);   
 local OriLua_LL_VISUALS_ZS = gui.Slider(OriLua_LL_VISUALS_GBOX, "OriLua_LL_VISUALS_Z", "Z", zO, -20, 20);   
 
--------------------------------------- Checkbox + Sliders / Rainbow ( ShiinaChan#5523 (Me))
-
-local OriLua_LL_RAINBOWEN_VIS_CHECKBOX = gui.Checkbox(OriLua_LL_RAINBOW_GBOX,"RainbowEnOvCh", "Enemy Visible", false);
-local OriLua_LL_RAINBOWEN_OCC_CHECKBOX = gui.Checkbox(OriLua_LL_RAINBOW_GBOX,"RainbowEnOvCh", "Enemy Occluded", false);
-local OriLua_LL_RRAINBOWCR_CHECKBOX = gui.Checkbox(OriLua_LL_RAINBOW_GBOX,"RainbowCr", "Crosshair", false);
-local OriLua_LL_RAINBOW_TEXT = gui.Text(OriLua_LL_RAINBOW_GBOX, http.Get("https://raw.githubusercontent.com/LunarLuzogSM/OriLua/master/rainbow.txt"))
-
--------------------------------------- Checkbox + Sliders / Miscs ( ShiinaChan#5523 (Me))
+-------------------------------------- Checkbox + Sliders / Miscs ( ShiinaChan#5523 (Me)
 
 local OriLua_LL_MISCS_ERADAR = gui.Checkbox(OriLua_LL_MISCS_GBOX, "OriLua_LL_MISCS_ERADAR", "Engine Radar", false)
 local OriLua_LL_MISCS_RTOGGLEINDICATOR = gui.Checkbox(OriLua_LL_MISCS_GBOX, "OriLua_LL_MISCS_RTOGGLEINDICATOR", "Resolver Indicator", false )
@@ -63,6 +58,19 @@ local OriLua_LL_MISCS_NETWORKED = gui.Checkbox(OriLua_LL_MISCS_MULTI, "vis.local
 local OriLua_LL_MISCS_LBY = gui.Checkbox(OriLua_LL_MISCS_MULTI, "vis.local.aalines.lby", "LBY", false)
 local OriLua_LL_MISCS_LOCALANG = gui.Checkbox(OriLua_LL_MISCS_MULTI, "vis.local.aalines.networked", "Local Angle", false)
 local OriLua_LL_MISCS_LASTCHOKEDANG = gui.Checkbox(OriLua_LL_MISCS_MULTI, "vis.local.aalines.lby", "Last Choked", false)
+
+-------------------------------------- Checkbox + Sliders / Watermark ( ShiinaChan#5523 (Me)
+
+local OriLua_LL_VISUALS_WATERMARK = gui.Checkbox(OriLua_LL_WATERMARK_GBOX, "OriLua_LL_VISUALS_COLOR_WATERMARK_SHOW", "Show Watermark", false );
+local OriLua_LL_VISUALS_COLOR_WATERMARK_CP_AW = gui.ColorPicker(OriLua_LL_WATERMARK_GBOX, "OriLua_LL_VISUALS_COLOR_WATERMARK_S1", "AIMWARE Color", 255, 0, 0, 255)
+local OriLua_LL_VISUALS_COLOR_WATERMARK_CP_NET = gui.ColorPicker(OriLua_LL_WATERMARK_GBOX, "OriLua_LL_VISUALS_COLOR_WATERMARK_S2", ".Net Color", 255, 255, 255, 255)
+
+-------------------------------------- Checkbox + Sliders / Rainbow ( ShiinaChan#5523 (Me)
+
+local OriLua_LL_RAINBOWEN_VIS_CHECKBOX = gui.Checkbox(OriLua_LL_RAINBOW_GBOX,"RainbowEnOvCh", "Enemy Visible", false);
+local OriLua_LL_RAINBOWEN_OCC_CHECKBOX = gui.Checkbox(OriLua_LL_RAINBOW_GBOX,"RainbowEnOvCh", "Enemy Occluded", false);
+local OriLua_LL_RRAINBOWCR_CHECKBOX = gui.Checkbox(OriLua_LL_RAINBOW_GBOX,"RainbowCr", "Crosshair", false);
+local OriLua_LL_RAINBOW_TEXT = gui.Text(OriLua_LL_RAINBOW_GBOX, http.Get("https://raw.githubusercontent.com/LunarLuzogSM/OriLua/master/rainbow.txt"))
 
 -------------------------------------- Description ( ShiinaChan#5523 (Me))
 
@@ -135,6 +143,24 @@ local function on_aspect_ratio_changed()
  for i=1, 200 do   local i2=i*0.01;    i2 = 2 - i2;   local divisor = gcd(screen_width*i2, screen_height);    if screen_width*i2/divisor < 100 or i2 == 1 then   aspect_ratio_table[i] = screen_width*i2/divisor .. ":" .. screen_height/divisor;  end  end
 local aspect_ratio = OriLua_LL_VISUALS_ASPECT_RATIO_SLIDER:GetValue()*0.01;  aspect_ratio = 2 - aspect_ratio;   set_aspect_ratio(aspect_ratio);   end
 callbacks.Register('Draw', "Aspect Ratio" ,on_aspect_ratio_changed)
+
+----- Watermark (ShiinaChan#5523 & Michtar#8370)
+
+local function OriLua_LL_VISUALS_DRAW_WATERMARK()
+local OriLua_LL_VISUALS_WATERMARK_FONT = draw.CreateFont("Verdana", 30, 700);
+if entities.GetLocalPlayer() == nil then
+     return
+     end
+    if OriLua_LL_VISUALS_WATERMARK:GetValue() then
+    draw.SetFont(OriLua_LL_VISUALS_WATERMARK_FONT);
+    draw.Color(OriLua_LL_VISUALS_COLOR_WATERMARK_CP_AW:GetValue());
+    draw.TextShadow(1700, 20, "AIMWARE");
+	draw.SetFont(OriLua_LL_VISUALS_WATERMARK_FONT);
+	draw.Color(OriLua_LL_VISUALS_COLOR_WATERMARK_CP_NET:GetValue());
+    draw.TextShadow(1840, 20, ".Net");
+     end
+     end
+callbacks.Register("Draw", "OriLua_LL_VISUALS_DRAW_WATERMARK", OriLua_LL_VISUALS_DRAW_WATERMARK);
 
 ----- Rainbow (adrianobessa5682 -- https://aimware.net/forum/user-236354.html)
 
